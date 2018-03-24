@@ -1,0 +1,468 @@
+body {
+  //background-color: $body-bg;
+  background-color: #87BDB1;
+}
+
+a {
+	color: #6C23AB;
+}
+a:hover {
+	color: #6C23AB;
+}
+
+p {
+	font-size: 1.2em !important;
+}
+
+#header {
+  	.container {
+	  	width: 100vw;
+	  	padding-left: 0;
+	  	padding-right: 0;
+	}
+
+    .stream {
+      	position: absolute;
+      	background-color: $wusb-grey;
+        //background-color: #71B3AF;
+	  	text-align: right;
+	  	color: $wusb-white;
+	  	top: 1vh;
+	  	right: 1vw;
+
+      	h5 {
+			font-size: 1em;
+			font-weight: 500;
+
+			i {
+				font-size: 1em;
+				vertical-align: top;
+			}
+		}
+
+		.play:hover {
+			cursor: pointer;
+		}
+    }
+
+  	.tower {
+	  	background-color: $wusb-grey;
+		img {
+		  	margin: 15px auto 15px auto;
+		}
+	}
+
+	.navbar {
+		background-color: $wusb-blue;
+		border: none;
+		border-radius: 0;
+		text-align: center;
+
+		.navbar-collapse {
+
+			.nav {
+				display:inline-block;
+				float: none;
+				vertical-align: top;
+				border: none;
+			}
+
+			ul {
+				.active {
+					font-weight: bold;
+					a {
+						background-color: inherit;
+					}
+				}
+
+				li {
+					font-size: 18px;
+					list-style: none;
+					a {
+						color: $wusb-white;
+					}
+				}
+			}
+		}
+
+		.collapsing {
+			text-align: left;
+		}
+
+		.in {
+			text-align: left;
+
+			.nav {
+
+			}
+		}
+
+	}
+}
+
+#body {
+
+	color: $wusb-white;
+
+	h2 {
+		display: inline-block;
+		margin-top: 0;
+	}
+	.grid {
+		max-width: 95vw;
+
+		a {
+			color: $wusb-grey;
+			text-decoration: none;
+
+			.panel {
+				border-radius: 4px;
+			}
+		}
+
+		a:hover {
+			text-decoration: none;
+
+			.panel {
+				background-color: $wusb-grey;
+			}
+		}
+
+		.panel {
+			border-radius: 4px;
+			background-color: $wusb-blue;
+			transition: all 0.5s ease;
+
+			.btn-delete {
+				color: $wusb-white;
+				position: absolute;
+				top: 0;
+				right: 0;
+				padding: 0;
+				margin: 12px 14px;
+			}
+
+			h3 {
+				margin-top: 10px
+			}
+
+
+		}
+	}
+
+	.card-body {
+		h1, h2, h3 {
+			margin: 0;
+		}
+	}
+
+	/* clearfix */
+	.grid:after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+
+	.grid-sizer, .grid-item {
+		float: left;
+		width: 24vw;
+		padding: 10px 10px 0 0;
+	}
+
+	.grid-item--width2 {
+		width: 440px;
+	}
+
+	.grid-item--width3 {
+		width: 880px;
+	}
+
+	.grid-item--width4 {
+		width: 1100px;
+	}
+
+	.grid-item--expand {
+		width: 75vw;
+
+		.card {
+			height: auto;
+			background: white;
+		}
+	}
+
+  #popOut {
+    background-color: white;
+    color:black;
+    position: absolute;
+    display: block;
+    padding: 15px;
+    visibility: hidden;
+    border-radius: 15px;
+    width: 75vw;
+    z-index: 999;
+    margin-bottom: 20vw;
+
+    img {
+      position: relative;
+      width: 25vw;
+      left: 25vw;
+      border-radius: 15px;
+      display: block;
+      margin: -15px;
+      padding-bottom: 25px;
+    }
+  }
+
+  #popOutBG {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background:rgba(0,0,0,0.5);
+    z-index: 998;
+    visibility: hidden;
+  }
+
+
+	.btn-fab {
+		position: fixed;
+		right: 3vw;
+		bottom: 5vh;
+	}
+
+	.btn-fab:hover {
+		color: $wusb-white;
+	}
+
+	.jumbotron {
+    background-color: $wusb-blue;
+		.row {
+			margin: 0;
+		}
+	}
+
+
+	.user-picture-with-name {
+		display: inline-block;
+
+		p {
+			text-align: center;
+			margin-top: 10px;
+			margin-bottom: 0;
+			font-weight: bold;
+		}
+	}
+
+
+	form {
+		text-align: left;
+
+		.form-group {
+			label {
+				color: $wusb-white;
+			}
+
+			input {
+				color: $wusb-white;
+			}
+
+			input::-moz-placeholder{
+				color: #dfdee0;
+			}
+			input::-webkit-input-placeholder{
+				color: #dfdee0;
+			}
+
+		}
+
+		.tt-menu {
+			padding: 5px;
+			background-color: $wusb-white;
+			color: $wusb-blue;
+		}
+
+		.wysihtml5-toolbar {
+
+			li {
+				a {
+					color: $wusb-white;
+				}
+
+				a:hover, a:focus {
+					background-color: $wusb-light;
+					-webkit-box-shadow: none hoff voff blur color;
+					-moz-box-shadow: none hoff voff blur color;
+					box-shadow: none hoff voff blur color;
+				}
+
+				.wysihtml5-command-active {
+					background-color: $wusb-grey;
+				}
+			}
+
+			.dropdown {
+				.dropdown-menu {
+					background-color: $wusb-blue;
+					li a {
+						color: $wusb-white;
+					}
+				}
+			}
+
+			.open {
+				.dropdown-toggle {
+					background-color: $wusb-grey;
+				}
+			}
+
+		}
+
+		iframe {
+			border: none !important;
+		}
+
+		table {
+
+			tr:hover {
+				background-color: $wusb-grey;
+			}
+			td {
+				input {
+					width: 100%;
+					border: none;
+					color: white;
+					background-color: transparent;
+				}
+			}
+		}
+	}
+
+	.pagination {
+		.material-icons {
+			font-size:inherit;
+		}
+	}
+}
+
+.gallery-image img{
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.profile-image-dj-page {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#footer {
+	color: $wusb-white;
+	margin-top: 30px;
+	margin-bottom: 20px;
+	border-top: 1px solid #eeeeee;
+	padding-top: 15px;
+
+	.copyright {
+		margin-right: 10px;
+	}
+
+	.social-media {
+		margin: 0 10px 0 10px;
+		a:hover {
+			cursor: default;
+		}
+		object {
+			height: 1em;
+		}
+
+	}
+}
+
+input[type='text'], textarea {
+  	color: black;
+}
+
+/*
+@media only screen and (min-width: 768px) {
+	/* tablets and desktop */
+
+
+@media only screen and (max-width: 767px) {
+	/* phones */
+
+	#header {
+		.stream {
+			position: relative;
+			text-align: center;
+			top: auto;
+			right: auto;
+			padding-bottom: 10px;
+		}
+	}
+}
+
+/*
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+	#body {
+		.grid {
+			max-width: 450px;
+		}
+
+		.grid-sizer, .grid-item {
+			float: left;
+			width: 80px;
+			padding: 5px 5px 0 0;
+		}
+
+
+		.grid-item--expand {
+			width: 270px;
+
+		}
+	}
+}
+
+
+/* iPhone 6 -----------
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+	#body {
+		.grid {
+			max-width: 450px;
+		}
+
+		.grid-sizer, .grid-item {
+			float: left;
+			width: 100px;
+			padding: 5px 5px 0 0;
+		}
+
+
+		.grid-item--expand {
+			width: 300px;
+
+		}
+	}
+}
+
+/* iPhone 6+ -----------
+@media only screen and (min-device-width: 414px) and (max-device-height: 736px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2){
+	#body {
+		.grid {
+			max-width: 450px;
+		}
+
+		.grid-sizer, .grid-item {
+			float: left;
+			width: 110px;
+			padding: 5px 5px 0 0;
+		}
+
+
+		.grid-item--expand {
+			width: 330px;
+
+		}
+	}
+}
+*/

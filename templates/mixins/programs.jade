@@ -1,0 +1,172 @@
+include ../mixins/users
+include ../mixins/pagination
+
+script(src="https://unpkg.com/imagesloaded@4.1/imagesloaded.pkgd.min.js")
+//- script(src="../../public/js/masonry/imagesloaded.pkgd.min.js")
+script(src="../../public/js/site/masonry-fix.js")
+
+//- check this out : https://github.com/desandro/imagesloaded
+
+mixin programs()
+	.grid(data-masonry='{"itemSelector": ".grid-item"}')
+		for program in programs.results
+			.grid-item
+				a(href='/program/' + program.slug)
+					.card.card-content
+						.card-body
+							h4
+								!=program.title
+							h5
+								!=program.genre
+							p
+								!=program.description
+	+pagination(programs)
+
+mixin program()
+	h2=program.title
+	if user && user.isAdmin
+		div.btn.btn-fab
+			a(href='/program/' + program.slug + '/edit')
+				i.material-icons mode_edit
+	h3='Genre: ' + program.genre
+	p!=program.airTimeString
+	p Airs next on #{program.nextAirDateMMDDYY}
+	p!=program.description
+	hr
+	h4 DJs
+	div.dj-image
+		for dj in program.djs
+			+user-picture-with-name(dj)
+	hr
+	h4 Playlists
+	ul
+		for playlist in program.playlists
+			li
+				a(href='/playlist/' + playlist.id)=playlist.date.toLocaleDateString()
+
+mixin post-program(editing)
+	h2.col-sm-offset-1 Create a new program
+	.row
+		form(id="post-program" method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal.create-form.col-sm-10.col-sm-offset-1.profile-form.create-form.profile-form
+			input(type='hidden', name='action', value=editing ? 'edit-program' : 'add-program')
+			fieldset
+				if editing
+					p
+						a(href='/program/' + program.slug) View
+
+				//- Program
+				.form-group.label-floating
+					label(for='title', class="control-label") Title:
+					input(type='text' id='title', name='title' value=editing ? program.title : '').form-control
+
+				//- Genre
+				.form-group.label-floating
+					label(for='genre', class="control-label") Genre:
+					input(type='text' id='genre', name='genre' value=editing ? program.genre : '').form-control
+
+				//- Description
+				.form-group
+					label(for='description') Description:
+					textarea(id='description', name='description', class='wysiwyg')!=editing ? program.description : ''
+
+				//- DJs
+				.form-group.label-floating
+					label(for='dj', class="control-label") DJs:
+					ul.djs
+						if editing
+							for dj in program.djs
+								li
+									input(id='dj', name='dj', class='typeahead', type='text', value=dj.name.full)
+						for i in [1, 2]
+							li
+								input(id='dj' name='dj' class='typeahead' type='text')
+
+				//- Start time
+				.form-group
+					label(for='startTime') Start time:
+					div(class="input-group bootstrap-timepicker timepicker")
+						input(id="startTime", name="startTime", type="text", class="form-control input-small", value=editing ? program.startTimeString : '')
+						span(class="input-group-addon")
+							i(class="glyphicon glyphicon-time")
+
+				//- End time
+				.form-group
+					label(for='endTime') End time:
+					div(class="input-group bootstrap-timepicker timepicker")
+						input(id="endTime", name="endTime", type="text", class="form-control input-small", value=editing ? program.endTimeString : '')
+						span(class="input-group-addon")
+							i(class="glyphicon glyphicon-time")
+
+				//- Date
+				.form-group.label-floating
+					label(for='date', class="control-label") Date:
+					div(class="input-group date")
+						input(id="date", name="date", type="text", class="form-control", value=editing ? program.nextAirDateMMDDYY : '')
+						span(class="input-group-addon")
+							i(class="glyphicon glyphicon-th")
+
+				//- Biweekly
+				.form-group
+					label(for='isBiweekly') Biweekly:
+					input(type='checkbox' id='isBiweekly', name='isBiweekly' checked=editing && program.isBiweekly)
+
+				//- Submit
+				.form-group
+					button(type='submit', data-loading-text="Changing...").btn.btn-lg.btn-raised.btn-primary Save program
+
+mixin live-program(prg)
+	h5
+		span Listen to WUSB on 90.1fm
+		i.material-icons radio
+	if prg
+		h5='Listen to ' + prg.title
+		//- h5='Genre: ' + prg.genre
+		//- - var names = 'Djs:'
+		//- for dj in prg.djs
+		//- 	- names += ' ' + dj.name.first + ' ' + dj.name.last + ' and'
+		//- - names = names.substring(0, names.length - 4)
+		//- h5=names
+
+mixin djs()
+	.grid(data-masonry='{"itemSelector": ".grid-item"}' id="dj-grid")
+		//- Need an array of DJs to filter out duplicates
+		- var arrayOfDJs = []
+		for program in programs.results
+			for dj in program.djs
+				//- If DJ exists, don't add DJ to page
+				if !_.contains(arrayOfDJs, dj)
+					- arrayOfDJs.push(dj)
+					.grid-item
+						a(href='/dj/' + dj.slug)
+							.card.card-content
+								.card-body
+									h4
+										!=dj.slug
+									div.dj-image
+										img(class="profile-image-dj-page" src=dj.profileImage.exists ? dj.profileImage.href : '/images/alien.svg')
+	+pagination(programs)
+
+
+mixin dj()
+	- var arrayOfPlaylists = []
+	h2=dj.slug
+	div.dj-image
+		+user-picture-with-name(dj)
+	hr
+	h3 Programs
+	ul
+		for program in programs
+			a(href='/program/' + program.slug)
+				h5=program.title
+			if (program.playlists.length > 0)
+				for playlist in program.playlists
+					- arrayOfPlaylists.push(playlist)
+	hr
+	h3 Playlists
+	ul
+		for playlist in arrayOfPlaylists
+			li
+				a(href='/playlist/' + playlist.id)=playlist.date.toLocaleDateString()
+	hr
+	h3 Description
+	p=dj.description

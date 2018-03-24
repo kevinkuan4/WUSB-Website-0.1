@@ -1,0 +1,52 @@
+extends ../layouts/default
+
+block content
+	.container: .jumbotron.schedule
+		h2= 'The week of ' + (date1.getMonth() + 1) + '/' + date1.getDate() + ' - ' + (date2.getMonth() + 1) + '/' + date2.getDate()
+		div
+			div
+				- var weekToggle = week === 0 ? 1 : 0;
+				a(href='?weekState=' + weekToggle + '&week=back&date1=' + date1.getMonth() + 'q' + date1.getDate() + '&date2=' + date2.getMonth() + 'q' + date2.getDate()).previous
+					i.material-icons skip_previous
+					span Previous Week
+					
+				a(href='?weekState=' + weekToggle + '&week=fwd&date1=' + date1.getMonth() + 'q' + date1.getDate() + '&date2=' + date2.getMonth() + 'q' + date2.getDate()).next
+					span Next Week
+					i.material-icons skip_next
+		table
+			thead
+				tr
+					th
+					for day in days
+						th!=day
+			tbody
+				each timeslot, timeSlotIndex in timeslots
+					tr
+						td!=timeslot.string
+						each day, dayIndex in days
+							- var episode = calendar[day][timeslot.number]
+							if episode
+								- var program = episode.program
+								td(style="background-color: " + episode.color, rowspan!=program.lengthInMinutes/30).program.panel
+									a(href='/program/' + program.slug).panel-default
+										!=program.title
+										//code to display airing times of stations
+										if program.startTime - 1200 >= 100
+											- var start = String(program.startTime-1200)
+										else
+											- var start = String(program.startTime)
+										if program.endTime - 1200 >= 100
+											- var end = String(program.endTime-1200)
+										else
+											- var end = String(program.endTime)
+										if start.length === 3 && end.length === 3
+											p #{start.substr(0,1)}:#{start.substr(1,3)}  - #{end.substr(0,1)}:#{end.substr(1,3)}
+										else if start.length === 3
+											p #{start.substr(0,1)}:#{start.substr(1,3)}  - #{end.substr(0,2)}:#{end.substr(2,4)}
+										else if end.length === 3
+											p #{start.substr(0,2)}:#{start.substr(2,4)}  - #{end.substr(0,1)}:#{end.substr(1,3)}
+										else
+											p #{start.substr(0,2)}:#{start.substr(2,4)}  - #{end.substr(0,2)}:#{end.substr(2,4)}
+						
+							if !slotBoolMatrix[dayIndex][timeSlotIndex]
+								td

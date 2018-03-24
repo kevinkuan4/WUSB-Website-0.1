@@ -1,0 +1,10 @@
+extends ../layouts/default
+include ../mixins/playlists
+
+block js
+	script(src="/js/site/post-playlist.js")
+	
+block content
+	.container: .jumbotron
+		+post-playlist(true)
+	

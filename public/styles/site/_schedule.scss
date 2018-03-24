@@ -1,0 +1,38 @@
+.schedule {
+	
+	a {
+		color: $wusb-white;
+	}
+	a:hover {
+		cursor: pointer;
+	}
+	.previous {
+		float: left;
+	}
+	
+	.next {
+		float: right;
+	}
+
+	table { 
+		border: none;
+	  	border-collapse: collapse;
+	  	width:100%;
+	  	table-layout: fixed;
+		th {
+		  text-align: center;
+		}
+		td {
+			
+			p {
+				font-size: 14px;
+			}
+		}
+	}
+	
+	.program {
+		text-align: center;
+		font-weight: bold;
+	}
+	
+}

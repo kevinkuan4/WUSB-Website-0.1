@@ -1,0 +1,27 @@
+
+.sign-up {
+	.sign-up-form{
+		background:none;
+
+		h2 {
+			padding: 0 15px;
+		}
+		
+		.form-group {
+			
+			.col-xs-12 {
+				margin-bottom: 10px;
+			}
+			
+			button {
+				font-size: 16px;
+			}
+			
+			input {
+				color: $wusb-grey !important;
+			}
+		}
+	}
+	
+}
+

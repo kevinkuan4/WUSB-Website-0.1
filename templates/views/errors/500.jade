@@ -1,0 +1,6 @@
+extends ../../layouts/default
+
+block content
+	.container
+		h1=errorTitle || "Error (500)"
+		p.lead=errorMsg || "Sorry, the site has encountered an error."
